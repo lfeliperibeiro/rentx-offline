@@ -1,8 +1,10 @@
 import React from "react";
-import { Container, Header, Title, SubTitle, Footer } from "./styles";
+import { Container, Header, Title, Form, SubTitle, Footer } from "./styles";
 import { StatusBar } from "react-native";
 import { Button } from "../../components/Button";
 import { useTheme } from "styled-components";
+import { Input } from "../../components/Input";
+import { InputPassword } from "../../components/InputPassword";
 
 export function SignIn() {
   const theme = useTheme();
@@ -20,6 +22,16 @@ export function SignIn() {
           uma experiência incrível.
         </SubTitle>
       </Header>
+      <Form>
+        <Input
+          iconName={"mail"}
+          placeholder={"E-mail"}
+          keyboardType={"email-address"}
+          autoCorrect={false}
+          autoCapitalize={"none"}
+        />
+        <InputPassword iconName={"lock"} placeholder={"Senha"} />
+      </Form>
       <Footer>
         <Button
           title={"Login"}

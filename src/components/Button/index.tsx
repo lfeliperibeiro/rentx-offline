@@ -7,7 +7,6 @@ import { ActivityIndicator } from "react-native";
 interface Props extends RectButtonProps {
   title: string;
   color?: string;
-  enabled?: boolean;
   loading?: boolean;
   light?: boolean;
 }

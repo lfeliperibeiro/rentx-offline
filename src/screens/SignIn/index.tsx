@@ -1,20 +1,48 @@
 import React, { useState } from "react";
 import { Container, Header, Title, Form, SubTitle, Footer } from "./styles";
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   StatusBar,
   TouchableWithoutFeedback,
 } from "react-native";
+import * as Yup from "yup";
 import { Button } from "../../components/Button";
 import { useTheme } from "styled-components";
 import { Input } from "../../components/Input";
 import { InputPassword } from "../../components/InputPassword";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 export function SignIn() {
+  const theme = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const theme = useTheme();
+
+  const navigation: NavigationProp<any> = useNavigation();
+  async function handleSingIn() {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required("Email obridatório")
+          .email("Digite um email válido"),
+        password: Yup.string().required("A senha é obrigatória"),
+      });
+      await schema.validate({ email, password });
+      Alert.alert("Tudo certo");
+    } catch (e) {
+      if (e instanceof Yup.ValidationError) {
+        Alert.alert("Opa", e.message);
+      } else {
+        Alert.alert("Erro na autenticação");
+      }
+    }
+  }
+
+  function handleNewAccount() {
+    navigation.navigate("SignUpFirstStep");
+  }
+
   return (
     <KeyboardAvoidingView behavior={"position"} enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -51,15 +79,15 @@ export function SignIn() {
           <Footer>
             <Button
               title={"Login"}
-              onPress={() => {}}
-              enabled={false}
+              onPress={handleSingIn}
+              enabled={true}
               loading={false}
             />
             <Button
               title={"Criar conta gratuita"}
               color={theme.colors.background_secondary}
               light
-              onPress={() => {}}
+              onPress={handleNewAccount}
               enabled={true}
               loading={false}
             />

@@ -9,7 +9,7 @@ import {
   FormTitle,
 } from './styles';
 import { BackButton } from '../../../components/BackButton';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { Bullet } from '../../../components/Bullet';
 import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
@@ -25,7 +25,7 @@ export function SignUpFirstStep() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [driveLicense, setDriveLicense] = useState('');
-  const navigation: NavigationProp<any> = useNavigation();
+  const navigation = useNavigation();
 
   function handleBack() {
     navigation.goBack();

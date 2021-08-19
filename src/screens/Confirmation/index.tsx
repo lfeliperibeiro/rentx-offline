@@ -6,11 +6,7 @@ import { Container, Content, Title, Message, Footer } from './styles';
 
 import LogoSvg from '../../assets/logo_background_gray.svg';
 import DoneSvg from '../../assets/done.svg';
-import {
-  NavigationProp,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 interface Params {
   title: string;
@@ -20,7 +16,7 @@ interface Params {
 
 export function Confirmation() {
   const { width } = useWindowDimensions();
-  const navigation: NavigationProp<any> = useNavigation();
+  const navigation = useNavigation();
   const route = useRoute();
   const { title, message, nextScreen } = route.params as Params;
   function handleConfirm() {

@@ -9,11 +9,7 @@ import {
   FormTitle,
 } from './styles';
 import { BackButton } from '../../../components/BackButton';
-import {
-  NavigationProp,
-  useNavigation,
-  // useRoute,
-} from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Bullet } from '../../../components/Bullet';
 
 import { Button } from '../../../components/Button';
@@ -25,40 +21,55 @@ import {
 } from 'react-native';
 import { InputPassword } from '../../../components/InputPassword';
 import { useTheme } from 'styled-components';
+import api from '../../../services/api';
 
-// interface Params {
-//   user: {
-//     name: string;
-//     email: string;
-//     driveLicense: string;
-//   };
-// }
+interface Params {
+  user: {
+    name: string;
+    email: string;
+    driverLicense: string;
+  };
+}
 
 export function SignUpSecondStep() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const theme = useTheme();
-  const navigation: NavigationProp<any> = useNavigation();
-  // const route = useRoute();
-  // const { user } = route.params as Params;
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { user } = route.params as Params;
 
   function handleBack() {
     navigation.goBack();
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!password || !passwordConfirm) {
       return Alert.alert('Informe a senha e a confimação');
     }
     if (password !== passwordConfirm) {
       return Alert.alert('As senhas não são iguais');
     }
-    navigation.navigate('Confirmation', {
-      nextScreen: 'SignIn',
-      title: 'Conta Criada!',
-      message: `Agora é só fazer login\ne aproveitar`,
-    });
+
+    await api
+      .post('/users', {
+        name: user.name,
+        email: user.email,
+        driver_license: user.driverLicense,
+        password,
+      })
+      .then(() => {
+        navigation.navigate('Confirmation', {
+          nextScreen: 'SignIn',
+          title: 'Conta Criada!',
+          message: `Agora é só fazer login\ne aproveitar`,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        return Alert.alert('Opa', 'não foi possível cadastrar');
+      });
   }
 
   return (

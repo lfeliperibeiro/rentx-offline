@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { Container } from "./styles";
-import BrandSvg from "../../assets/brand.svg";
-import LogoSvg from "../../assets/logo.svg";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import React, { useEffect } from 'react';
+import { Container } from './styles';
+import BrandSvg from '../../assets/brand.svg';
+import LogoSvg from '../../assets/logo.svg';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 import Animated, {
   interpolate,
@@ -11,7 +11,7 @@ import Animated, {
   withTiming,
   Extrapolate,
   runOnJS,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
 export function Splash() {
   const splashAnimation = useSharedValue(0);
@@ -27,7 +27,7 @@ export function Splash() {
             splashAnimation.value,
             [0, 50],
             [0, -50],
-            Extrapolate.CLAMP
+            Extrapolate.CLAMP,
           ),
         },
       ],
@@ -42,7 +42,7 @@ export function Splash() {
             splashAnimation.value,
             [0, 50],
             [-50, 0],
-            Extrapolate.CLAMP
+            Extrapolate.CLAMP,
           ),
         },
       ],
@@ -50,7 +50,7 @@ export function Splash() {
   });
 
   function startApp() {
-    navigation.navigate("Home");
+    navigation.navigate('SignIn');
   }
 
   useEffect(() => {
@@ -60,17 +60,17 @@ export function Splash() {
         duration: 1000,
       },
       () => {
-        "worklet";
+        'worklet';
         runOnJS(startApp)();
-      }
+      },
     );
   }, []);
   return (
     <Container>
-      <Animated.View style={[brandStyles, { position: "absolute" }]}>
+      <Animated.View style={[brandStyles, { position: 'absolute' }]}>
         <BrandSvg width={80} height={50} />
       </Animated.View>
-      <Animated.View style={[logoStyles, { position: "absolute" }]}>
+      <Animated.View style={[logoStyles, { position: 'absolute' }]}>
         <LogoSvg width={180} height={20} />
       </Animated.View>
     </Container>

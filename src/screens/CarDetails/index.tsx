@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   About,
   Accessories,
@@ -13,30 +13,30 @@ import {
   Price,
   Rent,
   CarImages,
-} from "./styles";
+} from './styles';
 
-import { BackButton } from "../../components/BackButton";
-import { StatusBar, StyleSheet } from "react-native";
+import { BackButton } from '../../components/BackButton';
+import { StatusBar, StyleSheet } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
   Extrapolate,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
-import { ImageSlider } from "../../components/ImageSlider";
-import { Accessory } from "../../components/Accessory";
-import { Button } from "../../components/Button";
+import { ImageSlider } from '../../components/ImageSlider';
+import { Accessory } from '../../components/Accessory';
+import { Button } from '../../components/Button';
 import {
   NavigationProp,
   useNavigation,
   useRoute,
-} from "@react-navigation/native";
-import { CarDTO } from "../../dtos/carDTO";
-import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
-import { useTheme } from "styled-components";
+} from '@react-navigation/native';
+import { CarDTO } from '../../dtos/carDTO';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { useTheme } from 'styled-components';
 
 interface Params {
   car: CarDTO;
@@ -59,7 +59,7 @@ export function CarDetails() {
         scrollY.value,
         [0, 200],
         [200, 70],
-        Extrapolate.CLAMP
+        Extrapolate.CLAMP,
       ),
     };
   });
@@ -71,7 +71,7 @@ export function CarDetails() {
   });
 
   function handleConfirmRental() {
-    navigation.navigate("Schedule", { car });
+    navigation.navigate('Schedule', { car });
   }
 
   function handleBack() {
@@ -81,8 +81,8 @@ export function CarDetails() {
   return (
     <Container>
       <StatusBar
-        barStyle={"dark-content"}
-        backgroundColor={"transparent"}
+        barStyle={'dark-content'}
+        backgroundColor={'transparent'}
         translucent
       />
       <Animated.View
@@ -117,8 +117,8 @@ export function CarDetails() {
             <Name>{car.name}</Name>
           </Description>
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>{`R$ ${car.rent.price}`}</Price>
+            <Period>{car.period}</Period>
+            <Price>{`R$ ${car.price}`}</Price>
           </Rent>
         </Details>
         <Accessories>
@@ -141,7 +141,7 @@ export function CarDetails() {
 
       <Footer>
         <Button
-          title={"Escolher período do aluguel"}
+          title={'Escolher período do aluguel'}
           onPress={handleConfirmRental}
         />
       </Footer>
@@ -151,8 +151,8 @@ export function CarDetails() {
 
 const styles = StyleSheet.create({
   header: {
-    position: "absolute",
-    overflow: "hidden",
+    position: 'absolute',
+    overflow: 'hidden',
     zIndex: 1,
   },
 });

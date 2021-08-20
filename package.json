@@ -4,12 +4,14 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
-    "start": "expo start",
+    "expo-start": "expo start",
+    "start": "react-native start",
     "api": " json-server ./src/services/server.json --delay 700 --port 3333"
   },
   "dependencies": {
     "@expo-google-fonts/archivo": "^0.2.0",
     "@expo-google-fonts/inter": "^0.2.0",
+    "@nozbe/watermelondb": "^0.23.0",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
